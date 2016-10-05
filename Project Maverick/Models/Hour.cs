@@ -41,7 +41,7 @@ namespace Project_Maverick.Models
 
         public int Amount { get; set; } //sum of time between start and stop, subtract time for breaks?
         //public string User_Id { get; set; } //Has one user
-                
+
         public ApplicationUser user { get; set; }
         //public int Project_Id { get; set; } //Has one project
         public Project project { get; set; }
@@ -50,7 +50,7 @@ namespace Project_Maverick.Models
 
         //Must have machineType, workType,
 
-}
+    }
 
     public enum HourRegType
     {

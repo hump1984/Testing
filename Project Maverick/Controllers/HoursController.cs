@@ -192,7 +192,7 @@ namespace Project_Maverick.Controllers
                 var curUser = GetCurrentUser();
 
                 newHour.user = curUser;
-                newHour.project = db.Projects.Find(System.Convert.ToInt32(selectedProject));
+                newHour.project.Id = System.Convert.ToInt32(selectedProject);
 
                 db.Hours.Add(newHour);
                 db.SaveChanges();
