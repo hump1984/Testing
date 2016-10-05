@@ -1,0 +1,16 @@
+﻿
+@if (Request.IsAuthenticated)
+{
+<ul class="nav navbar-nav navbar-right">
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-cog"></span> <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+            <li>@Html.ActionLink("Projects", "Index", "Projects")</li>
+            <li>@Html.ActionLink("User roles", "Index", "Role")</li>
+            <li>@Html.ActionLink("Users", "Index", "User")</li>
+        </ul>
+    </li>
+</ul>
+}

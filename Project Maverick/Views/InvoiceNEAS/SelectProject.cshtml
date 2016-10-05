@@ -1,0 +1,19 @@
+﻿
+@using (Html.BeginForm("ProjectChosen", "Project", FormMethod.Get))
+{
+
+    <fieldset>
+
+        Project
+
+        @Html.DropDownList("Projects")
+
+        <p>
+
+            <input type="submit" value="Submit" />
+
+        </p>
+
+    </fieldset>
+
+} 

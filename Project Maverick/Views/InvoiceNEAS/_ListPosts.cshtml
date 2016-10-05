@@ -1,0 +1,85 @@
+﻿@using Project_Maverick.Models;
+@model IEnumerable<Project_Maverick.Models.InvoicePosts>
+
+<table class="table table-responsive table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractPostModels.PostCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractPostModels.Desc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractPostModels.Price)
+
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContractPostModels.Unit)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Amount)
+        </th>
+        <th>
+            Sum
+        </th>
+        <th>
+
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        //InvoicePosts post = item;
+
+       //ContractPostModel Cpost = post.ContractPostModels;
+        
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractPostModels.PostCode)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractPostModels.Desc)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractPostModels.Price)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.ContractPostModels.Unit)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditPost", new { id = item.ID }) |
+                @*@Html.ActionLink("Details", "Details", new { id = item.ID }) |*@
+                @Html.ActionLink("Delete", "DeletePost", new { id = item.ID })
+            </td>
+        </tr>
+
+    }
+
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><label>Total Sum </label></td>
+        <td>
+            @Html.Label((string)ViewBag.ItemsTotal)
+        </td>
+        <td>
+   
+        </td>
+    </tr>
+
+</table>
+

@@ -1,0 +1,17 @@
+﻿@model Nullable<DateTime>
+
+@{
+    DateTime dt = DateTime.Now;
+    if (Model != null)
+    {
+        dt = (System.DateTime)Model;
+
+    }
+    if (ViewBag.atDate != null)
+    {
+        dt = ViewBag.atDate;
+    }
+    
+    
+    @Html.TextBox("", String.Format("{0:dd:MM:yyyy}", dt.ToShortDateString()), new { @class = "form-control datefield", type = "date"})
+} 

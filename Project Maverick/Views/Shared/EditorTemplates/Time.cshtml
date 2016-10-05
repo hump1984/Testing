@@ -1,0 +1,11 @@
+﻿@model Nullable<DateTime>
+
+@{
+    DateTime dt = DateTime.Now;
+    if (Model != null)
+    {
+        dt = (System.DateTime)Model;
+
+    }
+    @Html.TextBox("", String.Format("{0:HH:mm}", dt.ToShortTimeString()), new { @class = "form-control timefield", type = "time" })
+} 

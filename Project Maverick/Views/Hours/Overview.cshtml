@@ -1,0 +1,140 @@
+﻿@using Project_Maverick.Models
+@using System.Globalization
+@model Project_Maverick.Models.HourViewModels
+
+Current Total Hours: 
+@ViewBag.TotalHours
+
+@ViewBag.time
+
+<br/>
+
+<div class="row">
+    <div class="col-md-offset-4">
+        <div class="form-group table-responsive">
+            <table class="">
+                <tr>
+                    <td>
+                        @using (Html.BeginForm("Overview", "Hours", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "" }))
+                        {
+                            <input type="hidden" value="-1" name="changeWeek" />
+                <!-- <input type="hidden" value="@ViewBag.time" name="setTime" /> -->
+                            <button class="btn btn-default" type="submit" name="button" value="previous"><span class="glyphicon glyphicon-minus"></span></button>
+                        }
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" placeholder=@ViewBag.CurrentWeek>
+                    </td>   
+                    <!--using (Html.BeginForm()) -->
+                    <td>
+                        @using (Html.BeginForm("Overview", "Hours", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "" }))
+                        {
+                            <input type="hidden" value="1" name="changeWeek" />
+                    <!-- <input type="hidden" value="@ViewBag.time" name="setTime" /> -->
+                            <button class="btn btn-default" type="submit" name="button" value="next"><span class="glyphicon glyphicon-plus"></span></button>
+                        }
+                    </td>
+                </tr>
+            </table>
+       </div><!-- /input-group -->
+    </div><!-- /.col-lg-6 -->
+</div>
+
+<br />
+
+    <div class="table-responsive">
+        <table class="table">
+            <!-- On rows -->
+            <tr>
+                @{
+                    Dictionary<string, List<Hour>> datesAndHours = ViewBag.DatesAndHours;
+
+                    Dictionary<string, List<Hour>>.KeyCollection dates = datesAndHours.Keys;
+
+
+
+                    foreach (var date in dates)
+                    {
+                        DateTime datetime = DateTime.ParseExact(date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+
+                        <th class="active text-center"> @datetime.DayOfWeek.ToString() @date </th>
+                    }
+
+                }
+                
+</tr>
+            <!-- On cells (`td` or `th`) -->
+        <tr>
+                @{
+                    Dictionary<string, List<Hour>>.ValueCollection hours = datesAndHours.Values;
+
+                    int printAmount = 0;
+                    int totalAmount = 0;
+
+                    foreach (var date in dates)
+                    {
+                        printAmount = 0;
+                        totalAmount = 0;
+
+                        foreach (var hour in hours)
+                        {
+                            for (int i = 0; i < hour.Count; i++)
+                            {
+                                totalAmount += hour[i].Amount;
+
+                                if (date == hour[i].RegDateTime.ToShortDateString()) 
+                                {
+                                    printAmount = totalAmount;
+
+                                }
+                            }
+
+                        }
+
+                        DateTime datetime = DateTime.ParseExact(date, "dd.MM.yyyy", CultureInfo.InvariantCulture);
+                        if (datetime.DayOfWeek == DayOfWeek.Saturday || datetime.DayOfWeek == DayOfWeek.Sunday)
+                        {
+                            <td class="info">
+                                @Html.ActionLink(" ", "RegisterHours", "Hours", new { @atDate = date }, new { @class = "glyphicon glyphicon-plus btn" })
+                                <!-- <a href="/Hours/RegisterHours" value=@date><span class="glyphicon glyphicon-plus"></span></a>  -->
+                                <label class="text-justify">@printAmount</label>
+                            </td>
+                        }
+                        
+                        else if (printAmount == 0)
+                        {
+                            <td class="danger">
+                                @Html.ActionLink(" ", "RegisterHours", "Hours", new { @atDate = date }, new { @class = "glyphicon glyphicon-plus btn" })
+                                <!-- <a href="/Hours/RegisterHours" value=@date><span class="glyphicon glyphicon-plus"></span></a>  -->
+                                <label class="text-justify">@printAmount</label>
+                            </td>
+                        }
+                        
+                        else if (printAmount < 7.5 && printAmount > 0 )  //Need settings for max min hours, cant hard-code
+                        { 
+                            <td class="warning">
+                                @Html.ActionLink(" ", "RegisterHours", "Hours", new { @atDate = date }, new { @class = "glyphicon glyphicon-plus btn" })
+                                
+                                <label class="text-justify">@printAmount</label>
+                            </td>
+                        }
+                        
+                        else if (printAmount >= 7.5)
+                        {
+                            <td class="success">
+                                @Html.ActionLink(" ", "RegisterHours", "Hours", new { @atDate = date }, new { @class = "glyphicon glyphicon-plus btn" })
+                                
+                                <label class="text-justify">@printAmount</label>
+                            </td>
+                        }
+
+
+                        printAmount = 0;
+                    }
+
+}
+
+
+        </tr>
+    </table>
+</div>
