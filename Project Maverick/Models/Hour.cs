@@ -39,7 +39,7 @@ namespace Project_Maverick.Models
         [DataType(DataType.Time)]
         public DateTime StopDateTime { get; set; }
 
-        public int Amount { get; set; } //sum of time between start and stop, subtract time for breaks?
+        public int Amount { get; set; } //sum of time between start and stop when start stop is used
         //public string User_Id { get; set; } //Has one user
 
         public ApplicationUser user { get; set; }
@@ -48,7 +48,8 @@ namespace Project_Maverick.Models
         public string Comment { get; set; }
         public HourRegType RegType { get; set; } //May need its own table in DB
 
-        //Must have machineType, workType,
+        // TODO: add machineType, workType,
+        // TODO: add Machine models and views!
 
     }
 
@@ -57,6 +58,8 @@ namespace Project_Maverick.Models
         Normal,
         Overtime1,
         Overtime2
+        // TODO: add more and correct regtypes
+        // TODO: move regtypes to model and db for editing through interface.
     }
 
 }

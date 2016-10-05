@@ -27,9 +27,9 @@ namespace Project_Maverick.CSVReader
                 }
             }
 
-            //Finish this and add imports for projects, machines, users, hours.
-            //Need xml import/export for Project/Job-files
-            //Need PDF Exports for invoice/cost/hour reports etc.
+            // TODO: Finish Imports and add imports for projects, machines, users, hours.
+            // TODO: Need xml import/export for Project/Job-files
+            // TODO: Need PDF Exports for invoice/cost/hour reports etc.
            
         }
 }
